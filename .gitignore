@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sidecar build artifacts
+build/
+src-tauri/binaries/
+src-python/.venv/
+src-python/__pycache__/

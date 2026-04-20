@@ -7,5 +7,5 @@ Build using Tauri with React-TS-Vite frontend.
 To develop, run:
 
 ```bash
-pnpm run dev
+pnpm tauri:dev
 ```

@@ -3,6 +3,12 @@ use tauri::{Emitter, Manager, RunEvent};
 use tauri_plugin_shell::process::{CommandChild, CommandEvent};
 use tauri_plugin_shell::ShellExt;
 
+fn normalize_sidecar_output(bytes: &[u8]) -> String {
+    String::from_utf8_lossy(bytes)
+        .trim_end_matches(['\r', '\n'])
+        .to_string()
+}
+
 #[tauri::command]
 fn toggle_fullscreen(window: tauri::Window) {
     if let Ok(is_fullscreen) = window.is_fullscreen() {
@@ -56,12 +62,12 @@ fn spawn_and_monitor_sidecar(app_handle: tauri::AppHandle) -> Result<(), String>
         while let Some(event) = rx.recv().await {
             match event {
                 CommandEvent::Stdout(line_bytes) => {
-                    let line = String::from_utf8_lossy(&line_bytes).to_string();
+                    let line = normalize_sidecar_output(&line_bytes);
                     println!("Sidecar stdout: {}", line);
                     let _ = app_handle.emit("sidecar-stdout", line);
                 }
                 CommandEvent::Stderr(line_bytes) => {
-                    let line = String::from_utf8_lossy(&line_bytes).to_string();
+                    let line = normalize_sidecar_output(&line_bytes);
                     eprintln!("Sidecar stderr: {}", line);
                     let _ = app_handle.emit("sidecar-stderr", line);
                 }

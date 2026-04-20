@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "identifier": "com.pratapan.app",
   "build": {
-    "frontendDist": "..",
+    "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": {
       "script": "pnpm exec vite",

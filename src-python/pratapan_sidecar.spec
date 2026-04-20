@@ -17,6 +17,10 @@ def _target_triple() -> str:
 triple = _target_triple()
 out_name = f"pratapan-sidecar-{triple}"
 
+_is_linux = sys.platform.startswith("linux")
+_is_mac = sys.platform == "darwin"
+_is_windows = sys.platform == "win32"
+
 project_root = Path(SPECPATH).parent
 dist_dir = project_root / "src-tauri" / "binaries"
 dist_dir.mkdir(parents=True, exist_ok=True)
@@ -58,7 +62,7 @@ exe = EXE(
     [],
     name=out_name,
     debug=False,
-    strip=False,
+    strip=_is_linux or _is_mac,
     upx=False,
-    console=True,
+    console=not _is_windows,
 )

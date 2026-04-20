@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build",
+    "tauri:dev": "node --experimental-strip-types scripts/tauri.ts dev",
+    "tauri:build": "node --experimental-strip-types scripts/tauri.ts build",
     "sidecar:install": "uv sync --project src-python",
     "sidecar:build": "uv run --project src-python pyinstaller src-python/pratapan_sidecar.spec"
   },

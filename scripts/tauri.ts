@@ -2,6 +2,7 @@ import { execSync } from 'child_process';
 import { existsSync, readdirSync, statSync } from 'fs';
 import os from 'os';
 import path from 'path';
+import { ensureJre } from './download-jre.ts';
 
 type Mode = 'dev' | 'build';
 
@@ -59,6 +60,9 @@ function getLatestSidecarSourceMtimeMs(dir: string): number {
 }
 
 function ensureSidecarBuilt(forceBuild: boolean): void {
+  const jreDownloaded = ensureJre();
+  if (jreDownloaded) forceBuild = true; // JRE must be bundled into the new binary
+
   const triple = getTargetTriple();
   const sidecarPath = path.resolve('src-tauri/binaries', `pratapan-sidecar-${triple}`);
   const binaryExists = existsSync(sidecarPath);

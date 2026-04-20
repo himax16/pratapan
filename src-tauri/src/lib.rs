@@ -20,8 +20,12 @@ fn stop_sidecar(app_handle: &tauri::AppHandle) {
     if let Some(state) = app_handle.try_state::<Arc<Mutex<Option<CommandChild>>>>() {
         if let Ok(mut guard) = state.lock() {
             if let Some(mut process) = guard.take() {
-                // Ask sidecar to shut down gracefully first.
+                // Ask sidecar to shut down gracefully first, then force-kill
+                // after a short grace period so orphans never leak on Windows
+                // (which would hold an exclusive lock on the .exe file).
                 let _ = process.write(b"sidecar shutdown\n");
+                std::thread::sleep(std::time::Duration::from_millis(1500));
+                let _ = process.kill();
             }
         }
     }

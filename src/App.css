@@ -1,10 +1,10 @@
-#lowercaser {
+#spark-app {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
   padding: 48px 24px;
-  max-width: 600px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -16,6 +16,12 @@ h1 {
 .status {
   color: var(--text);
   opacity: 0.6;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.error {
+  color: #e55;
   font-size: 0.9rem;
   margin: 0;
 }
@@ -57,16 +63,49 @@ button {
   }
 }
 
-.output {
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--accent-bg);
+button.secondary {
+  background: transparent;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  color: var(--text);
+}
+
+button.remove {
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  background: #c0392b;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--accent-bg);
+  font-weight: 600;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.id-cell {
   font-family: monospace;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
   word-break: break-all;
-  white-space: pre-wrap;
-  margin: 0;
-  user-select: all;
 }

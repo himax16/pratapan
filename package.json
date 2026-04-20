@@ -11,7 +11,8 @@
     "tauri:dev": "node --experimental-strip-types scripts/tauri.ts dev",
     "tauri:build": "node --experimental-strip-types scripts/tauri.ts build",
     "sidecar:install": "uv sync --project src-python",
-    "sidecar:build": "uv run --project src-python pyinstaller src-python/pratapan_sidecar.spec"
+    "sidecar:build": "uv run --project src-python pyinstaller src-python/pratapan_sidecar.spec",
+    "jre:download": "node --experimental-strip-types scripts/download-jre.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.10.1",

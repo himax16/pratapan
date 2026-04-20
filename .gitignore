@@ -28,3 +28,4 @@ build/
 src-tauri/binaries/
 src-python/.venv/
 src-python/__pycache__/
+src-python/jre/
